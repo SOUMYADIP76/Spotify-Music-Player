@@ -45,7 +45,7 @@ async function main(){
     //show all the song in the playlist
     let songul= document.querySelector(".songlist").getElementsByTagName("ul")[0]
    for (const song of songs) {
-    songul.innerHTML=songul.innerHTML+`<li>
+    songul.innerHTML+=`<li>
     <img class="invert" src="music.svg" alt="">
     <div class="info">
         <div>${song.replaceAll("%20", " ")}</div>
@@ -55,7 +55,7 @@ async function main(){
     <span>Play Now</span>
     <img class="invert" src="play.svg" alt="">
    </div> 
-    <li/>`;
+    </li>`; //<li/> to </li>
    }
 Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e=>{
     e.addEventListener("click",element=>{
