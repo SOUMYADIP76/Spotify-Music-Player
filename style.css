@@ -175,7 +175,7 @@ body{
     align-items: center;
     overflow-y:scroll;
     overflow-x: hidden;
-    height: 450px;
+    max-height: 55vh; /*stop using px*/
     padding: 20px; 
 }
 .hamburger{
