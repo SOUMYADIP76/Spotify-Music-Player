@@ -1,5 +1,6 @@
 console.log("js is working properly")
 let currentsong=new Audio();
+let songs;
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
         return "00:00";
@@ -40,7 +41,7 @@ const playMusic=(track)=>{
 }
 async function main(){
     //get the list of all songs.
-    let songs=await getsongs();
+    songs=await getsongs();
     console.log(songs);
     //show all the song in the playlist
     let songul= document.querySelector(".songlist").getElementsByTagName("ul")[0]
@@ -55,7 +56,7 @@ async function main(){
     <span>Play Now</span>
     <img class="invert" src="play.svg" alt="">
    </div> 
-    </li>`; //<li/> to </li>
+    </li>`;
    }
 Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e=>{
     e.addEventListener("click",element=>{
@@ -85,6 +86,35 @@ document.querySelector(".seekbar").addEventListener("click",e=>{
     let percent=(e.offsetX/e.target.getBoundingClientRect().width)*100 ;
     document.querySelector(".circle").style.left=percent+ "%";
     currentsong.currentTime=((currentsong.duration)*percent)/100;
+})
+//add an eventlistner for hamburger:-
+document.querySelector(".hamburger").addEventListener("click",()=>{
+    document.querySelector(".left").style.left=0;
+})
+//add a eventlistner for close button 
+document.querySelector(".close").addEventListener("click",()=>{
+    document.querySelector(".left").style.left="-120%"
+})
+//add a eventlistner for previous & next buttons:-
+previous.addEventListener("click",()=>{
+    console.log("clicked")
+    let index=songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
+    console.log(songs,index)
+    if((index-1)>=0){
+    playMusic(songs[index-1])
+    }
+})
+next.addEventListener("click",()=>{
+    let index=songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
+    console.log(songs,index)
+    if((index+1)<songs.length-1){
+    playMusic(songs[index+1])
+    }
+})
+//Add an event to volume:
+document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
+    console.log(e,e.target,e.target.value)
+    currentsong.volume=parseInt(e.target.value)/100;
 })
 }
 main();
