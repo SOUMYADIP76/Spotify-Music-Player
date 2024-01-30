@@ -43,8 +43,11 @@ async function main(){
     //get the list of all songs.
     songs=await getsongs();
     console.log(songs);
+    let z = (songs.length)*11;
+    z+="%";
     //show all the song in the playlist
-    let songul= document.querySelector(".songlist").getElementsByTagName("ul")[0]
+    let songul= document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    songul.style.paddingTop =z; 
    for (const song of songs) {
     songul.innerHTML+=`<li>
     <img class="invert" src="music.svg" alt="">
